@@ -200,3 +200,83 @@ import Button from '@/components/common/Button';
 ├── .gitignore
 ├── README.md
 └── package.json         # Root for scripts to run both client/server
+
+
+///--------------------///
+//(3) SETTLED FOLDER STRUCTURE
+/client
+│
+├── /public
+│   ├── favicon.ico
+│   └── index.html
+│
+└── /src
+    ├── /assets
+    │     ├── logo.png
+    │     └── placeholder.jpg
+    │
+    ├── /components
+    │     ├── /ui
+    │     │     ├── Button.tsx
+    │     │     ├── Spinner.tsx
+    │     │     ├── Hero.tsx
+    │     │     └── Card.tsx
+    │     │
+    │     ├── /layout
+    │     │     ├── Navbar.tsx
+    │     │     ├── Footer.tsx
+    │     │     └── Sidebar.tsx
+    │     │
+    │     └── /blog
+    │           ├── PostCard.tsx
+    │           ├── PostList.tsx
+    │           ├── PostEditor.tsx
+    │           └── CategoryBadge.tsx
+    │
+    ├── /pages
+    │     ├── Home
+    │     │     └── Home.tsx
+    │     ├── Post
+    │     │     └── Post.tsx
+    │     ├── CreatePost
+    │     │     └── CreatePost.tsx
+    │     ├── EditPost
+    │     │     └── EditPost.tsx
+    │     ├── Category
+    │     │     └── Category.tsx
+    │     ├── Login
+    │     │     └── Login.tsx
+    │     ├── Register
+    │     │     └── Register.tsx
+    │     └── Dashboard
+    │           └── Dashboard.tsx
+    │
+    ├── /context
+    │     └── AuthContext.tsx
+    │
+    ├── /hooks
+    │     └── useAuth.ts
+    │
+    ├── /services
+    │     ├── api.ts
+    │     ├── postService.ts
+    │     ├── authService.ts
+    │     └── categoryService.ts
+    │
+    ├── /router
+    │     └── AppRouter.tsx
+    │
+    ├── /types
+    │     ├── post.d.ts
+    │     ├── user.d.ts
+    │     ├── category.d.ts
+    │     └── index.d.ts
+    │
+    ├── /utils
+    │     ├── formatDate.ts
+    │     ├── slugify.ts
+    │     └── constants.ts
+    │
+    ├── App.tsx
+    ├── main.tsx
+    └── index.css
