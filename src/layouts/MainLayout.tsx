@@ -2,6 +2,9 @@ import NavBar from "../components/ui/NavBar";
 import Hero from "../components/ui/Hero";
 import Features from "../components/ui/Features";
 import Trending from "../components/ui/Trending";
+import Categories from "../components/ui/categories";
+import Bloggers from "../components/ui/Bloggers";
+import SupportCreators from "../components/ui/Subscribe";
 function MainLayout() {
   return (
     <div className="p-2">
@@ -9,6 +12,9 @@ function MainLayout() {
       <Hero />
       <Features />
       <Trending />
+      <Categories />
+      <Bloggers />
+      <SupportCreators />
     </div>
   );
 }
