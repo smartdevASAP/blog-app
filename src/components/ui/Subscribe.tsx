@@ -3,7 +3,7 @@ import { Coffee } from "lucide-react";
 function SupportCreators() {
   return (
     <section className="mt-24 px-6">
-      <div className="max-w-4xl mx-auto bg-amber-500 rounded-2xl p-10 text-center shadow-lg">
+      <div className="max-w-4xl mx-auto bg-blue-500 rounded-2xl p-10 text-center shadow-lg">
         <Coffee className="w-12 h-12 text-white mx-auto mb-4" />
 
         <h2 className="text-3xl font-bold text-white mb-3">
@@ -16,7 +16,7 @@ function SupportCreators() {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="px-6 py-3 bg-white text-amber-600 font-semibold rounded-md hover:bg-amber-100 transition">
+          <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md hover:bg-amber-100 transition">
             ☕ Buy Me a Coffee
           </button>
 

@@ -5,6 +5,7 @@ import Trending from "../components/ui/Trending";
 import Categories from "../components/ui/categories";
 import Bloggers from "../components/ui/Bloggers";
 import SupportCreators from "../components/ui/Subscribe";
+import Footer from "../components/ui/Footer";
 function MainLayout() {
   return (
     <div className="p-2">
@@ -15,6 +16,7 @@ function MainLayout() {
       <Categories />
       <Bloggers />
       <SupportCreators />
+      <Footer />
     </div>
   );
 }
