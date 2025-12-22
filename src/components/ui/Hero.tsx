@@ -4,7 +4,7 @@ function Hero() {
   return (
     <section id="home" className="p-12 text-center">
       <div className="flex justify-center items-center gap-2">
-        <h1 className="text-4xl font-bold text-gray-600 flex items-center gap-2">
+        <h1 className="md:text-4xl text-2xl font-bold text-gray-600 flex items-center gap-2">
           Write. Publish. Inspire.
           <img src={stars_svg} alt="stars" className="inline-block w-6 h-6" />
         </h1>
