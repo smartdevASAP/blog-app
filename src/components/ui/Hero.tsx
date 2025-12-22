@@ -15,10 +15,10 @@ function Hero() {
         shaping the conversation.
       </p>
       <div className="flex items-center justify-center h-auto mt-8">
-        <img src={blog_img} alt="" />
+        <img className="rounded-sm" src={blog_img} alt="" />
       </div>
       {/* buttons here */}
-      <button className="px-5 mt-12 md:w-[200px]  w-full py-2 rounded-xs bg-blue-600 shadow-sm text-white">
+      <button className="px-5 mt-12 md:w-[200px]  w-full py-2 rounded-full bg-blue-600 shadow-sm text-white">
         Blog
       </button>
     </section>

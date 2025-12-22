@@ -53,7 +53,7 @@ function Categories() {
             onClick={() => setActiveCategory(item)}
             className={`whitespace-nowrap text-sm md:text-lg transition relative pb-2 ${
               activeCategory._id === item._id
-                ? "text-blue-600 font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-blue-600"
+                ? "text-blue-600 font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full  after:bg-blue-600"
                 : "text-gray-500 hover:text-gray-800"
             }`}
           >
