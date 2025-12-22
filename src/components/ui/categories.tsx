@@ -35,22 +35,23 @@ function Categories() {
     },
   ];
 
-  // ✅ default selected category
   const [activeCategory, setActiveCategory] = useState<Category>(
     categoriesArr[0]
   );
 
   return (
-    <div className="mt-12">
-      <h1 className="text-3xl font-bold text-center mb-8">Categories</h1>
+    <section id="categories" className="mt-16 px-4">
+      <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
+        Categories
+      </h1>
 
       {/* 🔹 Category Nav */}
-      <nav className="flex justify-center gap-10 border-b border-gray-200 pb-3">
+      <nav className="flex gap-6 md:gap-10 overflow-x-auto md:overflow-visible border-b border-gray-200 pb-3 justify-start md:justify-center">
         {categoriesArr.map((item) => (
           <button
             key={item._id}
             onClick={() => setActiveCategory(item)}
-            className={`text-lg transition relative pb-2 ${
+            className={`whitespace-nowrap text-sm md:text-lg transition relative pb-2 ${
               activeCategory._id === item._id
                 ? "text-blue-600 font-semibold after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-blue-600"
                 : "text-gray-500 hover:text-gray-800"
@@ -62,12 +63,12 @@ function Categories() {
       </nav>
 
       {/* 🔹 Conditional Content */}
-      <section className="mt-6 text-center max-w-xl mx-auto">
-        <p className="text-gray-600 text-base leading-relaxed">
+      <div className="mt-6 text-center max-w-xl mx-auto">
+        <p className="text-gray-600 text-sm md:text-base leading-relaxed">
           {activeCategory.text}
         </p>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 

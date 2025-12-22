@@ -2,7 +2,7 @@ import { Coffee } from "lucide-react";
 
 function SupportCreators() {
   return (
-    <section className="mt-24 px-6">
+    <section id="coffee" className="mt-24 px-6">
       <div className="max-w-4xl mx-auto bg-blue-500 rounded-2xl p-10 text-center shadow-lg">
         <Coffee className="w-12 h-12 text-white mx-auto mb-4" />
 

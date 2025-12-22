@@ -34,7 +34,7 @@ function Trending() {
   ];
 
   return (
-    <section className="mt-16 px-6 md:px-16">
+    <section id="trending" className="mt-16 px-6 md:px-16">
       <h2 className="text-3xl font-bold text-center mb-10">Trending Posts</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {trendingPosts.map((post) => (

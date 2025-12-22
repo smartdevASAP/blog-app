@@ -1,8 +1,8 @@
 import { stars_svg } from "../../assets/assets_config";
-
+import { blog_img } from "../../assets/assets_config";
 function Hero() {
   return (
-    <section className="p-12 text-center">
+    <section id="home" className="p-12 text-center">
       <div className="flex justify-center items-center gap-2">
         <h1 className="text-4xl font-bold text-gray-600 flex items-center gap-2">
           Write. Publish. Inspire.
@@ -15,12 +15,10 @@ function Hero() {
         shaping the conversation.
       </p>
       <div className="flex items-center justify-center h-auto mt-8">
-        <div className="w-[600px] h-[300px] bg-gray-400 rounded-sm shadow-sm text-center">
-          {/* content here */}
-        </div>
+        <img src={blog_img} alt="" />
       </div>
       {/* buttons here */}
-      <button className="px-5 mt-8 md:w-[200px]  w-full py-2 rounded-xs bg-blue-600 shadow-sm text-white">
+      <button className="px-5 mt-12 md:w-[200px]  w-full py-2 rounded-xs bg-blue-600 shadow-sm text-white">
         Blog
       </button>
     </section>
