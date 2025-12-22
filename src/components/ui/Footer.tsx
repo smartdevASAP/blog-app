@@ -120,7 +120,7 @@ function Footer() {
   };
 
   return (
-    <footer className="mt-20 border-t border-gray-200 bg-white">
+    <footer className="mt-20 border-t border-gray-200 bg-blue-100/1.3">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Quick Links */}
         <div>

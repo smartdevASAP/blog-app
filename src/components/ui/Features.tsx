@@ -25,7 +25,7 @@ function Features() {
 
   return (
     <section className="mt-16 px-6 pt-8 border-t-2 border-gray-100 md:px-16">
-      <h2 className="text-3xl font-bold text-center mb-10">
+      <h2 className="md:text-3xl text-xl text-gray-600  font-semibold text-center mb-10">
         Why Blog With Us?
       </h2>
 
