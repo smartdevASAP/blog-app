@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { logo_svg } from "../../assets/assets_config";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,12 +49,16 @@ function NavBar() {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="px-5 py-2 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 transition">
-              Login
-            </button>
-            <button className="px-5 py-2 bg-gray-100 text-gray-800 text-sm border border-gray-200 rounded-md hover:bg-gray-200 transition">
-              Register
-            </button>
+            <Link to="/login">
+              <button className="px-5 py-2 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 transition">
+                Login
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="px-5 py-2 bg-gray-100 text-gray-800 text-sm border border-gray-200 rounded-md hover:bg-gray-200 transition">
+                Register
+              </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
