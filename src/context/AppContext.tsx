@@ -1,31 +1,33 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-// import type { User } from "../types/user";
-//types
+
+// User type
 export type User = {
   id: string;
   name: string;
   email: string;
 } | null;
 
+// Context type
 type AppContextType = {
   user: User;
   setUser: (user: User) => void;
   isAuthenticated: boolean;
   activeSection: string;
   setActiveSection: (section: string) => void;
-  name: String | null;
-  setName: (name: String) => void;
+  name: string;
+  setName: (name: string) => void;
 };
 
-//  Context
+// Create context
 const AppContext = createContext<AppContextType | null>(null);
 
-//Provider
+// Provider
 export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User>(null);
   const [activeSection, setActiveSection] = useState("home");
-  const [name, setName] = useState<String>("");
+  const [name, setName] = useState<string>(""); // safe string state
+
   return (
     <AppContext.Provider
       value={{
@@ -43,7 +45,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Hook
+// Hook to consume context
 export function useAppContext() {
   const context = useContext(AppContext);
   if (!context) {
