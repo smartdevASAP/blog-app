@@ -106,12 +106,16 @@ function NavBar() {
 
         {/* Auth Buttons */}
         <div className="mt-auto p-6 flex flex-col gap-3 border-t">
-          <button className="w-full py-2 bg-blue-500 text-white rounded-md">
-            Login
-          </button>
-          <button className="w-full py-2 bg-gray-100 text-gray-800 border rounded-md">
-            Register
-          </button>
+          <Link to="/login">
+            <button className="w-full py-2 bg-blue-500 text-white rounded-md">
+              Login
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="w-full py-2 bg-gray-100 text-gray-800 border rounded-md">
+              Register
+            </button>
+          </Link>
         </div>
       </aside>
     </>
