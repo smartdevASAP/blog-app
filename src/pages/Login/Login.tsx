@@ -1,6 +1,7 @@
 import { toast } from "sonner";
 import { FcGoogle } from "react-icons/fc";
 import { useAppContext } from "../../context/AppContext";
+import { Link } from "react-router-dom";
 
 function Login() {
   const { email, password, setEmail, setPassword, login } = useAppContext();
@@ -64,14 +65,16 @@ function Login() {
           </div>
 
           {/* Submit Button */}
-          <button
-            onClick={() => login()}
-            type="submit"
-            className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg
+          <Link to="/dashboard">
+            <button
+              onClick={() => login()}
+              type="submit"
+              className="w-full py-2 bg-blue-600 text-white font-semibold rounded-lg
                        hover:bg-blue-700 transition"
-          >
-            Log In
-          </button>
+            >
+              Log In
+            </button>
+          </Link>
         </form>
 
         {/* OR Divider */}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [name, setName] = useState("");
@@ -63,12 +64,14 @@ function Register() {
           />
         </div>
 
-        <button
-          onClick={handleRegister}
-          className="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-medium"
-        >
-          Register
-        </button>
+        <Link to="/dashboard">
+          <button
+            onClick={handleRegister}
+            className="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-medium"
+          >
+            Register
+          </button>
+        </Link>
 
         <div className="flex items-center my-4">
           <hr className="flex-1 border-gray-300" />
