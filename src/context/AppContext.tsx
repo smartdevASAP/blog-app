@@ -38,6 +38,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
+  // const [isAuthenticated, setIsAuthenticated] = useState(true);
   //logging in button onclick;
   const login = (): void => {
     console.log({ email, password });
@@ -47,7 +48,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       value={{
         user,
         setUser,
-        isAuthenticated: Boolean(user),
+        isAuthenticated: Boolean(true), //source of error
         activeSection,
         setActiveSection,
         name,
