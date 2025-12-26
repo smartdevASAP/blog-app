@@ -1,27 +1,39 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Bell, ChevronDown } from "lucide-react";
 import { useAppContext } from "../../context/AppContext";
 
 function TopBar() {
-  const { user } = useAppContext();
+  const { user, menuText } = useAppContext();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const statusRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        statusRef.current &&
+        !statusRef.current.contains(event.target as Node)
+      ) {
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <div className="md:flex hidden justify-between items-center p-4 bg-white border-b border-gray-200 shadow-sm">
+    <div className="flex  justify-between items-center p-4 bg-white border-b border-gray-200 shadow-sm relative">
       {/* Left Section: Page title / overview */}
       <div className="flex items-center gap-2">
         <div className="bg-gray-100 text-gray-500 text-sm font-semibold px-2 py-1 rounded-sm">
-          Overview
+          Dashboard/
         </div>
-        <p className="text-gray-700 font-medium text-sm">Dashboard</p>
+        <p className="text-gray-400 font-medium text-sm">{menuText}</p>
       </div>
 
       {/* Right Section: Status, notifications, user */}
-      <div className="flex items-center gap-6">
-        {/* Status */}
-        <div className="text-sm text-gray-600">
-          Status: <span className="font-semibold text-green-600">Active</span>
-        </div>
+      <div className="flex items-center gap-6 relative">
+        {/* Status Dropdown */}
 
         {/* Notifications */}
         <button className="relative p-2 rounded-full hover:bg-gray-100 transition">
@@ -43,9 +55,9 @@ function TopBar() {
           <ChevronDown size={16} className="text-gray-500" />
         </div>
 
-        {/* Optional dropdown menu */}
+        {/* User dropdown */}
         {menuOpen && (
-          <div className="absolute right-4 top-12 bg-white border border-gray-200 shadow-md rounded-md w-40 py-2">
+          <div className="absolute right-4 top-12 bg-white border border-gray-200 shadow-md rounded-md w-40 py-2 z-50">
             <p className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
               Profile
             </p>

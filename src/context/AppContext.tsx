@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+
 // import { toast } from "sonner";
 
 export type User = {
@@ -25,6 +26,9 @@ type AppContextType = {
   setPassword: (password: string) => void;
   setFullName: (fullName: string) => void;
   login: () => void | any;
+  menuText: string;
+  setMenuText: (name: string) => any;
+  activeMenu: (label: string) => any;
 };
 
 // Create context
@@ -38,10 +42,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
-  // const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [menuText, setMenuText] = useState("");
   //logging in button onclick;
   const login = (): void => {
     console.log({ email, password });
+  };
+  //sidebar menu that is active
+  const activeMenu = (label: string): void | any => {
+    setMenuText(label);
+    console.log(menuText);
   };
   return (
     <AppContext.Provider
@@ -60,6 +69,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         password,
         setPassword,
         login,
+        menuText,
+        setMenuText,
+        activeMenu,
       }}
     >
       {children}
