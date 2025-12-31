@@ -1,46 +1,11 @@
 import { Search, Flame, TrendingUp, Bookmark } from "lucide-react";
+import { dummyBlogs } from "../../assets/Dummies";
 
 function Explore() {
-  const categories = [
-    "Technology",
-    "Programming",
-    "Design",
-    "AI",
-    "Startups",
-    "Productivity",
-    "Finance",
-  ];
-
-  const posts = [
-    {
-      title: "Mastering React Performance in 2025",
-      author: "Alex Morgan",
-      category: "Programming",
-      readTime: "6 min read",
-      trending: true,
-    },
-    {
-      title: "Why Most SaaS Fail in the First Year",
-      author: "Sarah Kim",
-      category: "Startups",
-      readTime: "4 min read",
-      trending: false,
-    },
-    {
-      title: "Design Systems That Scale",
-      author: "Michael Lee",
-      category: "Design",
-      readTime: "5 min read",
-      trending: true,
-    },
-    {
-      title: "AI Tools Every Developer Should Know",
-      author: "Daniel James",
-      category: "AI",
-      readTime: "7 min read",
-      trending: false,
-    },
-  ];
+  // Extract unique categories from dummy blogs
+  const categories = Array.from(
+    new Set(dummyBlogs.flatMap((b) => b.tags))
+  ).slice(0, 8); // limit to 8 for simplicity
 
   return (
     <div className="space-y-8">
@@ -77,19 +42,19 @@ function Explore() {
         ))}
       </div>
 
-      {/* Posts */}
+      {/* Blog Posts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {posts.map((post) => (
+        {dummyBlogs.map((blog) => (
           <div
-            key={post.title}
+            key={blog.id}
             className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition"
           >
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                {post.category}
+                {blog.tags[0] || "General"}
               </span>
 
-              {post.trending && (
+              {blog.likes > 150 && (
                 <span className="flex items-center gap-1 text-xs text-orange-600 font-medium">
                   <Flame size={14} />
                   Trending
@@ -98,11 +63,11 @@ function Explore() {
             </div>
 
             <h2 className="text-lg font-semibold text-gray-800 mb-2">
-              {post.title}
+              {blog.title}
             </h2>
 
             <p className="text-sm text-gray-500 mb-4">
-              By {post.author} · {post.readTime}
+              By {blog.author.name} · {blog.readTime} min read
             </p>
 
             <div className="flex items-center justify-between">
@@ -118,7 +83,7 @@ function Explore() {
         ))}
       </div>
 
-      {/* Trending Section */}
+      {/* Trending Topics */}
       <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-4">
           <TrendingUp size={18} className="text-blue-600" />
@@ -126,16 +91,14 @@ function Explore() {
         </div>
 
         <div className="flex flex-wrap gap-3">
-          {["React", "Next.js", "AI", "SaaS", "Tailwind", "Node.js"].map(
-            (topic) => (
-              <span
-                key={topic}
-                className="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600"
-              >
-                #{topic}
-              </span>
-            )
-          )}
+          {categories.map((topic) => (
+            <span
+              key={topic}
+              className="px-3 py-1 text-sm rounded-full bg-gray-100 text-gray-600"
+            >
+              #{topic}
+            </span>
+          ))}
         </div>
       </div>
     </div>

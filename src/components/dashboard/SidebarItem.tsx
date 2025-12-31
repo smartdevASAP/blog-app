@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
 interface SidebarItemProps {
-  to: string; // required link
+  to: string;
   icon: React.ReactNode;
   label?: string;
   active?: boolean;
   onClick?: () => void;
   collapsed?: boolean;
+  badge?: number; // ✅ optional badge
 }
 
 export default function SidebarItem({
@@ -16,6 +17,7 @@ export default function SidebarItem({
   active,
   onClick,
   collapsed,
+  badge,
 }: SidebarItemProps) {
   return (
     <Link to={to} onClick={onClick}>
@@ -30,7 +32,13 @@ export default function SidebarItem({
         `}
       >
         {icon}
-        {!collapsed && <span>{label}</span>}
+        {!collapsed && <span className="flex-1">{label}</span>}
+
+        {!collapsed && badge && (
+          <span className="ml-auto text-xs font-semibold bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">
+            {badge}
+          </span>
+        )}
       </div>
     </Link>
   );

@@ -1,152 +1,176 @@
-import { FileText, Eye, ThumbsUp, TrendingUp, Plus } from "lucide-react";
+import { Plus, Bookmark } from "lucide-react";
+import { dummyBlogs } from "../../assets/Dummies";
+import { useAppContext } from "../../context/AppContext";
 
 function Dashboard() {
-  // Dummy data (replace later with API)
-  const stats = [
-    {
-      label: "Total Blogs",
-      value: 24,
-      icon: <FileText size={20} />,
-    },
-    {
-      label: "Total Views",
-      value: "18.4k",
-      icon: <Eye size={20} />,
-    },
-    {
-      label: "Likes",
-      value: 1_284,
-      icon: <ThumbsUp size={20} />,
-    },
-    {
-      label: "Growth",
-      value: "+12.5%",
-      icon: <TrendingUp size={20} />,
-      positive: true,
-    },
-  ];
-
-  const recentActivity = [
-    {
-      title: "How to Build Scalable APIs",
-      status: "Published",
-      time: "2 hours ago",
-    },
-    {
-      title: "Understanding React Hooks",
-      status: "Draft",
-      time: "Yesterday",
-    },
-    {
-      title: "Why TypeScript Matters",
-      status: "Published",
-      time: "3 days ago",
-    },
-  ];
+  const recentBlogs = dummyBlogs.slice(0, 4);
+  const { AddToReadList, bookmarkingFunc } = useAppContext();
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-xl md:text-3xl font-bold text-gray-900">
             Dashboard Overview
           </h1>
           <p className="text-sm text-gray-500 mt-1">
-            Track your content performance and activity
+            Manage your content and recent activity
           </p>
         </div>
 
-        <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition">
+        <button
+          className="
+            inline-flex items-center gap-2
+            bg-blue-600 text-white
+            px-5 h-11
+            rounded-xl
+            text-sm font-semibold
+            shadow-sm
+            hover:bg-blue-700 hover:shadow-md
+            active:scale-[0.97]
+            transition
+            whitespace-nowrap
+          "
+        >
           <Plus size={16} />
           Write Blog
         </button>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between"
-          >
-            <div>
-              <p className="text-sm text-gray-500">{stat.label}</p>
-              <h2 className="text-2xl font-semibold text-gray-800 mt-1">
-                {stat.value}
-              </h2>
-            </div>
+      {/* Quick Stats */}
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <StatCard label="My Total Blogs" value={dummyBlogs.length} />
+        <StatCard
+          label="Draft"
+          value={dummyBlogs.filter((b) => b.status === "published").length}
+        />
+        <StatCard
+          label="Trashed"
+          value={dummyBlogs.filter((b) => b.status === "draft").length}
+        />
+        <StatCard
+          label="Bookmarked"
+          value={dummyBlogs.filter((b) => b.status === "trashed").length}
+        />
+      </section>
 
+      {/* Recent Blogs */}
+      <section className="space-y-4">
+        <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+          Recent Blogs
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {recentBlogs.map((blog) => (
             <div
-              className={`p-3 rounded-lg ${
-                stat.positive
-                  ? "bg-green-50 text-green-600"
-                  : "bg-gray-100 text-gray-600"
-              }`}
+              key={blog.id}
+              className="
+                bg-white border border-gray-200
+                rounded-2xl p-5
+                shadow-sm
+                hover:shadow-md hover:-translate-y-0.5
+                transition
+              "
             >
-              {stat.icon}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Lower Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Recent Activity */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 shadow-sm">
-          <div className="p-6 border-b border-gray-100">
-            <h3 className="font-semibold text-gray-800">Recent Activity</h3>
-          </div>
-
-          <div className="divide-y">
-            {recentActivity.map((item) => (
-              <div
-                key={item.title}
-                className="flex items-center justify-between p-6"
-              >
-                <div>
-                  <p className="font-medium text-gray-800">{item.title}</p>
-                  <p className="text-sm text-gray-500">{item.time}</p>
-                </div>
-
+              {/* Status & Date */}
+              <div className="flex items-center justify-between mb-3">
                 <span
-                  className={`text-xs font-medium px-3 py-1 rounded-full ${
-                    item.status === "Published"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-yellow-100 text-yellow-700"
+                  className={`text-xs font-semibold px-2.5 py-1 rounded-full capitalize ${
+                    blog.status === "published"
+                      ? "bg-green-50 text-green-700"
+                      : blog.status === "draft"
+                      ? "bg-yellow-50 text-yellow-700"
+                      : "bg-red-50 text-red-700"
                   }`}
                 >
-                  {item.status}
+                  {blog.status}
                 </span>
+                <span className="text-xs text-gray-400">{blog.createdAt}</span>
               </div>
-            ))}
-          </div>
+
+              {/* Content */}
+              <h3 className="text-base font-semibold text-gray-900 line-clamp-2">
+                {blog.title}
+              </h3>
+
+              <p className="text-sm text-gray-500 mt-2 line-clamp-2">
+                {blog.excerpt}
+              </p>
+
+              <p className="mt-3 text-xs text-gray-400">
+                By <span className="font-medium">{blog.author.name}</span>
+              </p>
+
+              {/* Primary CTA */}
+              <button
+                className="
+                  mt-4 w-full
+                  flex items-center justify-center
+                  bg-blue-600 text-white
+                  py-2.5
+                  rounded-xl
+                  text-sm font-semibold
+                  shadow-sm
+                  hover:bg-blue-700 hover:shadow-md
+                  active:scale-[0.97]
+                  transition
+                "
+              >
+                Read Blog
+              </button>
+
+              {/* Secondary actions */}
+              <div className="mt-3 flex items-center justify-between">
+                <button
+                  onClick={() => AddToReadList(blog)}
+                  className="
+                    flex items-center gap-1.5
+                    px-3 py-1.5
+                    text-xs font-medium
+                    text-gray-600
+                    border border-gray-200
+                    rounded-full
+                    hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200
+                    transition
+                  "
+                >
+                  + Add to Readlist
+                </button>
+
+                <Bookmark
+                  onClick={() => bookmarkingFunc(blog)}
+                  size={22}
+                  className="
+                    text-gray-400
+                    hover:text-blue-600
+                    hover:scale-110
+                    cursor-pointer
+                    transition
+                  "
+                />
+              </div>
+            </div>
+          ))}
         </div>
+      </section>
+    </div>
+  );
+}
 
-        {/* Performance Summary */}
-        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">
-            Performance Summary
-          </h3>
-
-          <div className="space-y-4">
-            <div>
-              <p className="text-sm text-gray-500">Weekly Views</p>
-              <p className="text-lg font-semibold text-gray-800">4,320</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-500">Engagement Rate</p>
-              <p className="text-lg font-semibold text-gray-800">6.8%</p>
-            </div>
-
-            <div>
-              <p className="text-sm text-gray-500">Publishing Streak</p>
-              <p className="text-lg font-semibold text-gray-800">5 weeks</p>
-            </div>
-          </div>
-        </div>
-      </div>
+function StatCard({ label, value }: { label: string; value: number }) {
+  return (
+    <div
+      className="
+        bg-white border border-gray-200
+        rounded-2xl p-4
+        shadow-sm
+        hover:shadow-md
+        transition
+      "
+    >
+      <p className="text-xs text-gray-500">{label}</p>
+      <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
     </div>
   );
 }

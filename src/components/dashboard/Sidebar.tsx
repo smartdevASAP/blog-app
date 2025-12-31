@@ -16,7 +16,7 @@ import SidebarItem from "./SidebarItem";
 import { useAppContext } from "../../context/AppContext";
 
 function Sidebar() {
-  const { setMenuText } = useAppContext();
+  const { setMenuText, bookmarks } = useAppContext();
   const [activeItem, setActiveItem] = useState<string>("Overview");
   const [collapsed, setCollapsed] = useState(false);
 
@@ -73,7 +73,7 @@ function Sidebar() {
       section: "Engagement",
       items: [
         {
-          label: "Bookmarked",
+          label: `Bookmarked ${bookmarks.length}`,
           icon: <Bookmark size={18} />,
           to: "/dashboard/bookmarks",
         },
