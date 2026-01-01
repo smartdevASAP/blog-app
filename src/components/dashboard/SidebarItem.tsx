@@ -7,7 +7,7 @@ interface SidebarItemProps {
   active?: boolean;
   onClick?: () => void;
   collapsed?: boolean;
-  badge?: number; // ✅ optional badge
+  badge?: number; //badge
 }
 
 export default function SidebarItem({
