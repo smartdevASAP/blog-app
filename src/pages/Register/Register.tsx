@@ -1,34 +1,59 @@
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../../services/api";
 
 function Register() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    // client-side validation
     if (!name || !email || !password) {
       toast.error("Please fill in all fields");
       return;
     }
+
     if (!email.includes("@")) {
       toast.error("Enter a valid email address");
       return;
     }
+
     if (password.length < 6) {
       toast.error("Password must be at least 6 characters");
       return;
     }
 
-    toast.success("Registered successfully!", {
-      description: `Welcome, ${name}!`,
-    });
+    try {
+      setLoading(true);
 
-    setName("");
-    setEmail("");
-    setPassword("");
+      const res = await api.post("/register", {
+        username: name,
+        email,
+        password,
+      });
+
+      toast.success("Account created successfully!", {
+        description: `Welcome, ${res.data.user.username}!`,
+      });
+
+      // clear form
+      setName("");
+      setEmail("");
+      setPassword("");
+
+      // redirect after successful register
+      navigate("/dashboard");
+    } catch (err: any) {
+      toast.error(err.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleRegister = () => {
@@ -48,6 +73,7 @@ function Register() {
             onChange={(e) => setName(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
           />
+
           <input
             type="email"
             placeholder="Email Address"
@@ -55,6 +81,7 @@ function Register() {
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
           />
+
           <input
             type="password"
             placeholder="Password"
@@ -64,14 +91,13 @@ function Register() {
           />
         </div>
 
-        <Link to="/dashboard">
-          <button
-            onClick={handleRegister}
-            className="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-medium"
-          >
-            Register
-          </button>
-        </Link>
+        <button
+          onClick={handleRegister}
+          disabled={loading}
+          className="w-full mt-6 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-60"
+        >
+          {loading ? "Creating account..." : "Register"}
+        </button>
 
         <div className="flex items-center my-4">
           <hr className="flex-1 border-gray-300" />
@@ -89,9 +115,9 @@ function Register() {
 
         <p className="text-sm text-gray-500 text-center mt-4">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 hover:underline">
+          <Link to="/login" className="text-blue-600 hover:underline">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

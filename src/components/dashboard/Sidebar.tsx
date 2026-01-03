@@ -1,4 +1,7 @@
 import { useState } from "react";
+import api from "../../services/api";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   Compass,
@@ -26,6 +29,20 @@ function Sidebar() {
   };
 
   const toggleSidebar = () => setCollapsed(!collapsed);
+  const navigate = useNavigate();
+  const logout = async () => {
+    try {
+      const { data } = await api.get("/logout", { withCredentials: true });
+
+      if (data.success) {
+        toast.success("Logging out");
+        navigate("/");
+      } else toast.error("error occured in logging out");
+    } catch (err: any) {
+      console.log(err.message);
+      toast.error(err.message);
+    }
+  };
 
   // Full desktop menu
   const menuItems = [
@@ -91,7 +108,7 @@ function Sidebar() {
     },
   ];
 
-  // Mobile bottom nav: only 4 essential options
+  // Mobile bottom nav
   const mobileItems = [
     {
       label: "Overview",
@@ -109,7 +126,7 @@ function Sidebar() {
       <aside
         className={`hidden md:flex flex-col ${
           collapsed ? "w-20" : "w-64"
-        } h-screen border-r border-gray-200 bg-white px-4 py-6 transition-all duration-300`}
+        } h-screen sticky top-0 border-r border-gray-200 bg-white px-4 py-6 transition-all duration-300`}
       >
         {/* Logo + collapse button */}
         <div className="flex items-center justify-between mb-8">
@@ -160,7 +177,10 @@ function Sidebar() {
             collapsed={collapsed}
             onClick={() => handleClick("Settings")}
           />
-          <button className="flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg w-full">
+          <button
+            onClick={() => logout()}
+            className="flex items-center gap-3 px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg w-full"
+          >
             <LogOut size={18} />
             {!collapsed && "Logout"}
           </button>
