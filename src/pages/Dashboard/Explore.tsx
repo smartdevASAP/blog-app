@@ -1,12 +1,17 @@
 import { Search, Flame, TrendingUp, Bookmark } from "lucide-react";
 import { dummyBlogs } from "../../assets/Dummies";
+import { useState } from "react";
 
 function Explore() {
   // Extract unique categories from dummy blogs
   const categories = Array.from(
     new Set(dummyBlogs.flatMap((b) => b.tags))
   ).slice(0, 8); // limit to 8 for simplicity
-
+  //blog search
+  const [search, setSearch] = useState("");
+  const blogSearch = () => {
+    console.log(search);
+  };
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -18,16 +23,25 @@ function Explore() {
       </div>
 
       {/* Search */}
-      <div className="relative max-w-xl">
+      <div className="relative flex gap-7  max-w-xl">
         <Search
           size={18}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
         />
         <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           type="text"
-          placeholder="Search blogs, topics, or creators..."
+          placeholder="enter a keyword eg blog title, tag ..."
           className="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
         />
+        <button
+          className="bg-blue-600 text-white md:p-3 p-2 rounded-sm shadow-xs"
+          onClick={() => blogSearch()}
+        >
+          {" "}
+          search
+        </button>
       </div>
 
       {/* Categories */}
