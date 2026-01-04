@@ -54,7 +54,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     console.log({ email, password });
   };
 
-  // Sidebar menu that is active
+  // Sidebar menu that is active when in use
   const activeMenu = (label: string): void => {
     setMenuText(label);
     console.log(menuText);
