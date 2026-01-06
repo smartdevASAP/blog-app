@@ -60,9 +60,9 @@ function Sidebar() {
           to: "/dashboard/explore",
         },
         {
-          label: "My Feed",
+          label: "bloggers",
           icon: <BookOpen size={18} />,
-          to: "/dashboard/feed",
+          to: "/dashboard/bloggers",
         },
       ],
     },
